@@ -5,3 +5,8 @@ export type CreateUserDTO = {
   email: string
   password: string
 }
+
+export type UserSignInDTO = {
+  username:string
+  password:string
+}

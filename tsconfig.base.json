@@ -17,7 +17,8 @@
     "paths": {
       "@forext/shared": ["shared/src/index.ts"],
       "@forext/shared/dto": ["shared/src/lib/dto"],
-      "@forext/shared/entity": ["shared/src/lib/entity"]
+      "@forext/shared/entity": ["shared/src/lib/entity"],
+      "@forext/shared/utils": ["shared/src/lib/utils"]
     }
   },
   "exclude": ["node_modules", "tmp"]

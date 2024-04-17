@@ -1,15 +1,19 @@
-import { HttpCode, HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { CreateUserDTO } from "@forext/shared/dto"
-import { ExceptionsHandler } from "@nestjs/core/exceptions/exceptions-handler";
+import { CreateUserDTO, UserSignInDTO } from "@forext/shared/dto"
 import { User } from '@forext/shared/entity'
+import { Helper } from "@forext/shared/utils"
+import { JwtService } from "@nestjs/jwt";
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
-export class UserService {
+export class AuthService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>
+    private userRepository: Repository<User>,
+    private jwtService: JwtService,
+    private configService: ConfigService
   ) { }
 
   async UserSignUp(payload: CreateUserDTO): Promise<{ user: User }> {
@@ -25,11 +29,33 @@ export class UserService {
     newUser.email = payload.email
     newUser.firstname = payload.firstname
     newUser.lastname = payload.lastname
-    newUser.password = payload.password
+    let password = await Helper.HashString(payload.password)
+    newUser.password = password
     newUser.username = payload.username
 
     this.userRepository.create(newUser)
     return { user: newUser }
+  }
+
+  async UserSignIn(payload: UserSignInDTO): Promise<{ user: User, token: string }> {
+    const user = await this.userRepository.findOne({
+      where: {
+        username: payload.username
+      }
+    })
+
+    if (!user) {
+      throw new HttpException("Account with username not found", HttpStatus.NOT_FOUND)
+    }
+
+    const isPasswordCorrect = await Helper.CompareHashedStrings(payload.password, user.password)
+    if (!isPasswordCorrect) {
+      throw new HttpException("Invalid password", HttpStatus.BAD_REQUEST)
+    }
+    console.log("JWT", this.configService.get("JWT_SERVICE"))
+    const token = this.jwtService.sign({ id: user.userId })
+
+    return { user, token }
   }
 
 }
