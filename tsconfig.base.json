@@ -18,7 +18,10 @@
       "@forext/shared": ["shared/src/index.ts"],
       "@forext/shared/dto": ["shared/src/lib/dto"],
       "@forext/shared/entity": ["shared/src/lib/entity"],
-      "@forext/shared/utils": ["shared/src/lib/utils"]
+      "@forext/shared/utils": ["shared/src/lib/utils"],
+
+      "@forext/shared/proto": ["shared/src/lib/_proto"],
+      "@forext/shared/types": ["shared/src/lib/types"]
     }
   },
   "exclude": ["node_modules", "tmp"]

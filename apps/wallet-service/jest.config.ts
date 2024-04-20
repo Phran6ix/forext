@@ -1,18 +1,11 @@
 /* eslint-disable */
 export default {
-  // displayName: 'user-service',
-  displayName: [
-    "user-service",
-    {
-      "color": "blue",
-      "name": "user-service"
-    }
-  ],
+  displayName: 'wallet-service',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/apps/user-service',
+  coverageDirectory: '../../coverage/apps/wallet-service',
 };

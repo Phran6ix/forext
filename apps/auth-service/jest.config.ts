@@ -1,8 +1,7 @@
 /* eslint-disable */
 export default {
-  // displayName: 'user-service',
   displayName: [
-    "user-service",
+    "auth-service",
     {
       "color": "blue",
       "name": "user-service"
@@ -14,5 +13,5 @@ export default {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/apps/user-service',
+  coverageDirectory: '../../coverage/apps/auth-service',
 };

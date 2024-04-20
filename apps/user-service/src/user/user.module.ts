@@ -2,9 +2,7 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { User } from "@forext/shared/entity";
 import { JwtModule } from "@nestjs/jwt";
-import { AuthService } from "./auth.service";
-import { AuthController } from "./auth.controller";
-import { ConfigModule } from "@nestjs/config";
+import { UserService } from "./user.service";
 
 @Module({
   imports: [
@@ -14,9 +12,15 @@ import { ConfigModule } from "@nestjs/config";
       secret: "SECRET_PLACEHOLDER",
       signOptions: { expiresIn: "15m" }
     }),
+    TypeOrmModule.forRoot({
+      type: "mongodb",
+      host: "localhost",
+      port: 27017,
+      database: "fx-mrk-user"
+    }),
   ],
-  providers: [AuthService],
-  controllers: [AuthController]
+  providers: [UserService],
+  controllers: []
 
 })
 export class UserModule { }

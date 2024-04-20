@@ -1,0 +1,24 @@
+
+
+syntax = "proto3";
+
+package auth;
+
+message ResultUser {
+  string userId = 1;
+  string firstname = 2;
+  string lastname = 3;
+  string username = 4;
+  string email = 5;
+  string password = 6;
+  string createdAt = 7;
+}
+
+message CreateUserPayload {
+  string firstname = 1;
+  string lastname = 2;
+  string username = 3;
+  string email = 4;
+  string password = 5;
+
+}
