@@ -1,0 +1,20 @@
+{
+  "name": "data-access-wallet",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "common/data-access-wallet/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/common/data-access-wallet",
+        "tsConfig": "common/data-access-wallet/tsconfig.lib.json",
+        "packageJson": "common/data-access-wallet/package.json",
+        "main": "common/data-access-wallet/src/index.ts",
+        "assets": ["common/data-access-wallet/*.md"]
+      }
+    }
+  }
+}

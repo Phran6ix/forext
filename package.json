@@ -2,7 +2,9 @@
   "name": "@forext/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "proto:generate": "protoc --ts_proto_out=. ./proto/**/*.proto --ts_proto_opt=nestJs=true --experimental_allow_proto3_optional=true"
+  },
   "private": true,
   "dependencies": {
     "@grpc/grpc-js": "^1.10.6",
@@ -21,6 +23,7 @@
     "mongodb": "^5.9.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
+    "ts-proto": "^1.172.0",
     "tslib": "^2.3.0",
     "typeorm": "^0.3.20"
   },

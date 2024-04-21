@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package wallet;
+
+message CreateWalletPayload {
+  string userId =  1;
+}
+
+message GetUserWalletBalancePayload {
+  string userId = 2;
+}
+
+message DebitWalletBalancePayload {
+  string userId = 1;
+  string amount = 2;
+  string currency = 3;
+}
+
+message CreditWalletBalancePayload {
+  string userId = 1;
+  string amount = 2;
+  string currency = 3;
+}
+
+// message WalletReturn {
+//    user = 1;
+//   string walletId = 2;
+//   string amount = 3;
+//   string currency = 4;
+//   string  = 4;
+//   string currency = 4;
+ //}
+
+message ReturnEmpty {
+
+}
+service WalletService {
+  rpc CreateWallet (CreateWalletPayload) returns (ReturnEmpty) {}
+  rpc DebitwallerBalance (DebitWalletBalancePayload) returns (ReturnEmpty) {}
+  rpc CreditWalletBalance (CreditWalletBalancePayload) returns (ReturnEmpty)  {}
+  rpc GetUserWalletBalance (GetUserWalletBalancePayload) returns (ReturnEmpty)  {}
+}
