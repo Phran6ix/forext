@@ -36,7 +36,7 @@ message ReturnEmpty {
 }
 service WalletService {
   rpc CreateWallet (CreateWalletPayload) returns (ReturnEmpty) {}
-  rpc DebitwallerBalance (DebitWalletBalancePayload) returns (ReturnEmpty) {}
+  rpc DebitwalletBalance (DebitWalletBalancePayload) returns (ReturnEmpty) {}
   rpc CreditWalletBalance (CreditWalletBalancePayload) returns (ReturnEmpty)  {}
   rpc GetUserWalletBalance (GetUserWalletBalancePayload) returns (ReturnEmpty)  {}
 }

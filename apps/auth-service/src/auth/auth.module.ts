@@ -12,7 +12,14 @@ import { join } from "path";
         transport: Transport.GRPC,
         options: {
           package: "user",
-          protoPath: join(__dirname + "../../../../proto/user/user.proto")
+          protoPath: join(__dirname, "../../../proto/user/user.proto")
+        }
+      }, {
+        name: "WALLET_PACKAGE",
+        transport: Transport.GRPC,
+        options: {
+          package: "wallet",
+          protoPath: join(__dirname, "../../../proto/wallet/wallet.proto")
         }
       }
     ])],

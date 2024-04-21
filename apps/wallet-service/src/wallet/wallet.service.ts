@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm"
 import { Wallet } from "@forext/shared/entity"
 import { Repository } from "typeorm";
 import { GrpcMethod } from "@nestjs/microservices";
-import { CreateWalletPayload, CreditWalletBalancePayload, DebitWalletBalancePayload, GetUserWalletBalancePayload, ReturnEmpty, WalletServiceClient, WalletServiceController } from "../../../../proto/wallet/wallet"
+import { CreateWalletPayload, CreditWalletBalancePayload, DebitWalletBalancePayload, GetUserWalletBalancePayload, ReturnEmpty, WalletServiceController } from "../../../../proto/wallet/wallet"
 import { Observable } from "rxjs";
 import { UserDataPoint } from "@forext/data-access-user"
 
@@ -14,6 +14,7 @@ export class WalletService implements WalletServiceController {
     private walletRepo: Repository<Wallet>,
     private userDataPoint: UserDataPoint
   ) { }
+
   @GrpcMethod("WalletService", "createWallet")
   async createWallet(request: CreateWalletPayload): Promise<ReturnEmpty> {
     const user = await this.userDataPoint.GetAUserById(request.userId)
@@ -40,13 +41,67 @@ export class WalletService implements WalletServiceController {
     return {}
   }
 
-  debitwallerBalance(request: DebitWalletBalancePayload): ReturnEmpty | Promise<ReturnEmpty> | Observable<ReturnEmpty> {
-    throw new Error("Method not implemented.");
+  @GrpcMethod("WalletService", "debitwalletBalance")
+  async debitwallerBalance(request: DebitWalletBalancePayload): Promise<ReturnEmpty | Observable<ReturnEmpty>> {
+    const userWallet = await this.walletRepo.findOne({
+      where: {
+        user: {
+          userId: request.userId
+        },
+        currency: request.currency
+      }
+    })
+
+    if (!userWallet) {
+      throw new NotFoundException("User wallet not found")
+    }
+
+    const currentWalletBalance = parseInt(userWallet.amount)
+
+    if (currentWalletBalance <= +userWallet.amount) {
+      throw new HttpException("Insufficient funds", HttpStatus.BAD_REQUEST)
+    }
+
+    const updatedWalletBalance = currentWalletBalance - parseInt(request.amount)
+
+    // Create order and transaction entry
+    await this.walletRepo.update({ walletId: userWallet.walletId }, { amount: `${updatedWalletBalance}` })
+    return {}
   }
-  creditWalletBalance(request: CreditWalletBalancePayload): ReturnEmpty | Promise<ReturnEmpty> | Observable<ReturnEmpty> {
-    throw new Error("Method not implemented.");
+  @GrpcMethod("WalletService", "creditWalletBalance")
+  async creditWalletBalance(request: CreditWalletBalancePayload): Promise<ReturnEmpty | Observable<ReturnEmpty>> {
+    const userWallet = await this.walletRepo.findOne({
+      where: {
+        user: {
+          userId: request.userId
+        },
+        currency: request.currency
+      }
+    })
+
+    if (!userWallet) {
+      throw new NotFoundException("User wallet not found")
+    }
+
+    const currentWalletBalance = parseInt(userWallet.amount)
+    const updatedWalletBalance = currentWalletBalance + parseInt(request.amount)
+
+    // Create order and transaction entry
+    await this.walletRepo.update({ walletId: userWallet.walletId }, { amount: `${updatedWalletBalance}` })
+    return {}
   }
-  getUserWalletBalance(request: GetUserWalletBalancePayload): ReturnEmpty | Promise<ReturnEmpty> | Observable<ReturnEmpty> {
-    throw new Error("Method not implemented.");
+
+  @GrpcMethod("WalletService", "gctUserWalletBalance")
+  async getUserWalletBalance(request: GetUserWalletBalancePayload): Promise<ReturnEmpty | Promise<ReturnEmpty> | Observable<ReturnEmpty>> {
+    const userWallet = await this.walletRepo.findOne({
+      where: {
+        user: {
+          userId: request.userId
+        }
+      }
+    })
+
+    console.log(userWallet)
+    return {}
   }
 }
