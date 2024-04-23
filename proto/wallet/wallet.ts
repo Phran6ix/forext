@@ -30,9 +30,9 @@ export interface ReturnEmpty {
 export const WALLET_PACKAGE_NAME = "wallet";
 
 export interface WalletServiceClient {
-  createWallet(request: CreateWalletPayload): ReturnEmpty;
+  createWallet(request: CreateWalletPayload): Observable<ReturnEmpty>;
 
-  debitwalletBalance(request: DebitWalletBalancePayload): ReturnEmpty;
+  debitwalletBalance(request: DebitWalletBalancePayload): Observable<ReturnEmpty>;
 
   creditWalletBalance(request: CreditWalletBalancePayload): Observable<ReturnEmpty>;
 
@@ -55,7 +55,7 @@ export interface WalletServiceController {
 
 export function WalletServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["createWallet", "debitwalletBalance", "creditWalletBalance", "gctUserWalletBalance"];
+    const grpcMethods: string[] = ["createWallet", "debitwalletBalance", "creditWalletBalance", "getUserWalletBalance"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("WalletService", method)(constructor.prototype[method], method, descriptor);

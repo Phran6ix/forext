@@ -28,7 +28,7 @@ export interface CreateUserPayload {
 
 }
 export interface IUserService {
-  GetUserByEmail(data:GetUserByEmailPayload): Observable<any>
-  GetUserById(data:GetUserByIdPayload): Observable<any>
-  CreateUser(data:CreateUserPayload): Observable<any>
+  GetUserByEmail(data: GetUserByEmailPayload): Observable<any>
+  GetUserById(data: GetUserByIdPayload): Observable<any>
+  CreateUser(data: CreateUserPayload): Observable<any>
 }

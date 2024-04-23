@@ -1,5 +1,3 @@
-
-
 syntax = "proto3";
 
 package auth;
@@ -20,5 +18,17 @@ message CreateUserPayload {
   string username = 3;
   string email = 4;
   string password = 5;
-
 }
+
+message SignInPayload {
+  string username = 1;
+  string password = 2;
+}
+
+message ReturnEmpty {}
+
+service AuthService {
+  rpc signUp (CreateUserPayload) returns (ReturnEmpty) {}
+  rpc signIn (SignInPayload) returns (ResultUser) {}
+}
+

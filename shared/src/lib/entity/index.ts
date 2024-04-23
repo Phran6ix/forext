@@ -1,2 +1,2 @@
-export * from './user.entity'
-export * from './wallet.entity'
+export { User } from './user.entity'
+export { Wallet } from './wallet.entity'

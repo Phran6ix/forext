@@ -16,7 +16,8 @@ import { UserService } from "./user.service";
       type: "mongodb",
       host: "localhost",
       port: 27017,
-      database: "fx-mrk-user"
+      database: "fx-mrk-user",
+      synchronize: true
     }),
   ],
   providers: [UserService],

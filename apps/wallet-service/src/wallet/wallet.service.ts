@@ -5,22 +5,22 @@ import { Repository } from "typeorm";
 import { GrpcMethod } from "@nestjs/microservices";
 import { CreateWalletPayload, CreditWalletBalancePayload, DebitWalletBalancePayload, GetUserWalletBalancePayload, ReturnEmpty, WalletServiceController } from "../../../../proto/wallet/wallet"
 import { Observable } from "rxjs";
-import { UserDataPoint } from "@forext/data-access-user"
+// import { UserDataPoint } from "@forext/data-access-user"
 
 @Injectable()
 export class WalletService implements WalletServiceController {
   constructor(
     @InjectRepository(Wallet)
     private walletRepo: Repository<Wallet>,
-    private userDataPoint: UserDataPoint
+    // private userDataPoint: UserDataPoint
   ) { }
 
   @GrpcMethod("WalletService", "createWallet")
   async createWallet(request: CreateWalletPayload): Promise<ReturnEmpty> {
-    const user = await this.userDataPoint.GetAUserById(request.userId)
-    if (!user) {
-      throw new NotFoundException("User not found")
-    }
+    // const user = await this.userDataPoint.GetAUserById(request.userId)
+    // if (!user) {
+    //   throw new NotFoundException("User not found")
+    // }
 
     const walletExist = await this.walletRepo.exists({
       where: {
@@ -33,16 +33,16 @@ export class WalletService implements WalletServiceController {
     if (walletExist) {
       throw new HttpException("User already has a wallet", HttpStatus.CONFLICT)
     }
-
+    //
     const newWallet = new Wallet()
-    newWallet.user = user
+    // newWallet.user = user
 
     console.log("New wallet", newWallet)
     return {}
   }
 
   @GrpcMethod("WalletService", "debitwalletBalance")
-  async debitwallerBalance(request: DebitWalletBalancePayload): Promise<ReturnEmpty | Observable<ReturnEmpty>> {
+  async debitwalletBalance(request: DebitWalletBalancePayload): Promise<ReturnEmpty | Observable<ReturnEmpty>> {
     const userWallet = await this.walletRepo.findOne({
       where: {
         user: {

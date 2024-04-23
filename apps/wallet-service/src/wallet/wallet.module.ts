@@ -4,7 +4,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { Type } from "class-transformer";
 import { WalletService } from "./wallet.service";
 import { ClientsModule } from "@nestjs/microservices";
-import { UserDataPoint } from "@forext/data-access-user";
+// import { UserDataPoint } from "@forext/data-access-user";
 
 
 @Module({
@@ -13,10 +13,11 @@ import { UserDataPoint } from "@forext/data-access-user";
       type: "mongodb",
       host: "localhost",
       port: 27017,
-      database: "fx-mart-wallet"
+      database: "forext",
+      synchronize: true
     }),
     TypeOrmModule.forFeature([Wallet]),
   ],
-  providers: [WalletService, UserDataPoint]
+  providers: [WalletService]
 })
 export class WalletModule { }

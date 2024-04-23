@@ -1,7 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
-import { AppModule } from './app/app.module';
 import { UserModule } from './user/user.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { url } from 'inspector';

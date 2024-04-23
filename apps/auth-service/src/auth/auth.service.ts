@@ -1,27 +1,40 @@
-import { HttpException, HttpStatus, Inject, Injectable, OnModuleInit } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { Inject, Injectable, Logger, NotFoundException, OnModuleInit } from "@nestjs/common";
 import { CreateUserDTO, UserSignInDTO } from "@forext/shared/dto"
-import { User } from '@forext/shared/entity'
-import { Helper } from "@forext/shared/utils"
-import { JwtService } from "@nestjs/jwt";
-import { ConfigService } from "@nestjs/config";
 import { IUserService } from "@forext/shared/types"
-import { ClientGrpc } from "@nestjs/microservices";
+import { ClientGrpc, GrpcMethod } from "@nestjs/microservices";
+import { WalletServiceController } from "@forext/proto"
 import { firstValueFrom } from "rxjs";
+import { UserDataPoint } from '@forext/data-access-user'
+import { AUTH_SERVICE_NAME } from "proto/auth/auth";
+
 @Injectable()
-export class AuthService implements OnModuleInit {
-  private userService: IUserService
+export class AuthService {
+  constructor(
+    private userDataPoint: UserDataPoint
+  ) { }
 
-  constructor(@Inject("USER_PACKAGE") private userClient: ClientGrpc) { }
 
-  onModuleInit() {
-    this.userService = this.userClient.getService("UserService")
+  async SignUp(data: CreateUserDTO): Promise<unknown> {
+    console.log("KKSL")
+    // 1: User account is to be created
+    // 2: User wallet is to be created
+
+
+    const user = await this.userDataPoint.CreateUser(data)
+    console.log("tnnbsbo", user)
+
+    return user
   }
 
-  async UserSignUp(data: CreateUserDTO): Promise<unknown> {
+  async SignIn(data: UserSignInDTO): Promise<unknown> {
+    console.log("SIgn in is called")
+    const user = await this.userDataPoint.GetAUserByEmail(data.username)
+    if(!user) {
+      throw new NotFoundException("User with this username does not exist")
+    }
 
-    return this.userService.CreateUser({ ...data })
+    //return token
+    return user
   }
 }
 // export class AuthService {
