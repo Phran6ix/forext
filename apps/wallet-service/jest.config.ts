@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'wallet-service',
+  displayName: { name: 'wallet-service', color: "blue" },
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {

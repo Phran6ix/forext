@@ -12,16 +12,14 @@ async function bootstrap() {
     transport: Transport.GRPC,
     options: {
       package: AUTH_PACKAGE_NAME,
-      url: "0.0.0.0:6002",
+      url: process.env.APP_URL,
       protoPath: join(__dirname, "../../../proto/auth/auth.proto")
     }
   })
 
-  const globalPrefix = 'api';
-  const port = process.env.PORT || 3000;
   await app.listen();
   Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
+    `🚀 Authentication Application is running `
   );
 }
 

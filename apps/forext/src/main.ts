@@ -2,11 +2,15 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
 import { GateWayModule } from "./app.mmodule";
+import { RpcException } from '@nestjs/microservices';
+import { ExceptionHandler } from '@forext/shared/decorator';
 
 async function bootstrap() {
   const app = await NestFactory.create(GateWayModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
+  app.useGlobalFilters(new ExceptionHandler());
+
   const port = process.env.PORT || 3000;
   await app.listen(port);
   Logger.log(

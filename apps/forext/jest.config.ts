@@ -1,6 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'forext',
+  displayName: {
+    "name":"forext",
+    "color":"green"
+  },
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {

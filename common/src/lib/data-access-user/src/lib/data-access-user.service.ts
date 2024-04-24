@@ -1,17 +1,17 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "@forext/shared/entity"
-import { Repository } from "typeorm";
+import { MongoRepository, Repository } from "typeorm";
 
 @Injectable()
 export class UserDataPoint {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>
+    private userRepository: MongoRepository<User>
   ) { }
 
   async GetAUserById(userId: string): Promise<User | null> {
-    return await this.userRepository.findOne({
+    return this.userRepository.findOne({
       where: {
         userId
       }
@@ -19,9 +19,21 @@ export class UserDataPoint {
   }
 
   async GetAUserByEmail(email: string): Promise<User | null> {
-    return await this.userRepository.findOne({
+    return this.userRepository.findOne({
       where: {
         email
+      }
+    })
+  }
+
+  async UserExist(data: { email?: string, username?: string }): Promise<User | null> {
+    console.log(data)
+    return this.userRepository.findOne({
+      where: {
+        $or: [
+          { email: data.email },
+          { username: data.username }
+        ]
       }
     })
   }
@@ -35,8 +47,9 @@ export class UserDataPoint {
     user.email = data.email
     user.username = data.username
     user.password = data.password
-    console.log(user)
+
     this.userRepository.save(user)
+
     return user
   }
 }

@@ -1,10 +1,10 @@
 /* eslint-disable */
 export default {
   displayName:
-  {
-    "color": "blue",
-    "name": "user-service"
-  }
+    {
+      "color": "blue",
+      "name": "user-service"
+    }
   ,
   preset: '../../jest.preset.js',
   testEnvironment: 'node',

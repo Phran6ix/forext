@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'shared',
+  displayName: { name: 'shared', color: "blue" },
   preset: '../jest.preset.js',
   testEnvironment: 'node',
   transform: {
