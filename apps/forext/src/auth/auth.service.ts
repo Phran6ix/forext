@@ -30,7 +30,6 @@ export class AuthService implements OnModuleInit {
 
 
   async UserSignIn(data: UserSignInDTO): Promise<unknown> {
-    console.log("Here")
     const response = await firstValueFrom(this.authService.signIn(data))
     return response
   }

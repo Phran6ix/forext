@@ -27,6 +27,11 @@ export interface SignInPayload {
   password: string;
 }
 
+export interface SignInResult {
+  token: string;
+  user: ResultUser | undefined;
+}
+
 export interface ReturnEmpty {
 }
 
@@ -35,13 +40,13 @@ export const AUTH_PACKAGE_NAME = "auth";
 export interface AuthServiceClient {
   signUp(request: CreateUserPayload): Observable<ResultUser>;
 
-  signIn(request: SignInPayload): Observable<ResultUser>;
+  signIn(request: SignInPayload): Observable<SignInResult>;
 }
 
 export interface AuthServiceController {
   signUp(request: CreateUserPayload): Promise<ResultUser> | Observable<ResultUser> | ResultUser;
 
-  signIn(request: SignInPayload): Promise<ResultUser> | Observable<ResultUser> | ResultUser;
+  signIn(request: SignInPayload): Promise<SignInResult> | Observable<SignInResult> | SignInResult;
 }
 
 export function AuthServiceControllerMethods() {

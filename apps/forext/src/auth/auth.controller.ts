@@ -25,8 +25,8 @@ export class AuthController {
     }
   }
 
-// @UseFilters(new ExceptionHandler())
-    @Post("/sign-in")
+  // @UseFilters(new ExceptionHandler())
+  @Post("/sign-in")
   async UserSign(@Body() body: UserSignInDTO, @Res() res: Response) {
     try {
       const data = await this.authService.UserSignIn(body)

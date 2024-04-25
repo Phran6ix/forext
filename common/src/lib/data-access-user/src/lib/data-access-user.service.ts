@@ -19,6 +19,13 @@ export class UserDataPoint {
     })
   }
 
+  async GetAUserByUsername(username: string): Promise<User | null> {
+    return this.userRepository.findOne({
+      where: {
+        username
+      }
+    })
+  }
   async GetAUserByEmail(email: string): Promise<User | null> {
     return this.userRepository.findOne({
       where: {
