@@ -16,8 +16,8 @@ export class AuthController {
   @GrpcMethod(AUTH_SERVICE_NAME, "signUp")
   async UserSignUp(data: UserSignUpDTO, metadata: Metadata, call: ServerUnaryCall<any, any>) {
     console.log("W")
-    const response = await this.authService.SignUp(data)
-    return { nessage: "User created", data: response }
+    return await this.authService.SignUp(data)
+    // return { nessage: "User created", data: response }
   }
 
   @GrpcMethod(AUTH_SERVICE_NAME, "signIn")

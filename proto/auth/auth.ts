@@ -33,13 +33,13 @@ export interface ReturnEmpty {
 export const AUTH_PACKAGE_NAME = "auth";
 
 export interface AuthServiceClient {
-  signUp(request: CreateUserPayload): Observable<ReturnEmpty>;
+  signUp(request: CreateUserPayload): Observable<ResultUser>;
 
   signIn(request: SignInPayload): Observable<ResultUser>;
 }
 
 export interface AuthServiceController {
-  signUp(request: CreateUserPayload): Promise<ReturnEmpty> | Observable<ReturnEmpty> | ReturnEmpty;
+  signUp(request: CreateUserPayload): Promise<ResultUser> | Observable<ResultUser> | ResultUser;
 
   signIn(request: SignInPayload): Promise<ResultUser> | Observable<ResultUser> | ResultUser;
 }

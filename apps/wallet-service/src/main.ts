@@ -3,9 +3,11 @@ import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from "@nestjs/microservices"
 import { AppModule } from './app/app.module';
 import { join } from 'path';
+import { WalletModule } from './wallet/wallet.module';
 
+console.log(__dirname, "fnofns")
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(WalletModule, {
     transport: Transport.GRPC,
     options: {
       package: "wallet",

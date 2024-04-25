@@ -2,17 +2,11 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { UserDataPoint } from './data-access-user.service';
 import { User } from '@forext/shared/entity';
+import {dbConnection} from '@forext/shared/utils'
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: "mongodb",
-      host: "localhost",
-      port: 27017,
-      database: "forext",
-      entities: [User],
-      synchronize: true
-    }),
+    TypeOrmModule.forRoot(dbConnection),
     TypeOrmModule.forFeature([User])
   ],
   controllers: [],

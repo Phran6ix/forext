@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "@forext/shared/entity"
-import { MongoRepository, Repository } from "typeorm";
+import { MongoRepository, ObjectId } from "typeorm";
 
 @Injectable()
 export class UserDataPoint {
@@ -11,6 +11,7 @@ export class UserDataPoint {
   ) { }
 
   async GetAUserById(userId: string): Promise<User | null> {
+    // const _id = new ObjectId(userId)
     return this.userRepository.findOne({
       where: {
         userId
@@ -38,7 +39,7 @@ export class UserDataPoint {
     })
   }
 
-  async CreateUser(data: Omit<User, "userId" | "createdAt" | "deletedAt">) {
+  async CreateUser(data: Omit<User, "_id" | "userId" | "createdAt" | "deletedAt">) {
     console.log("Datapoint")
 
     const user = new User()
@@ -48,7 +49,7 @@ export class UserDataPoint {
     user.username = data.username
     user.password = data.password
 
-    this.userRepository.save(user)
+    await this.userRepository.save(user)
 
     return user
   }

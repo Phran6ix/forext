@@ -28,7 +28,7 @@ message SignInPayload {
 message ReturnEmpty {}
 
 service AuthService {
-  rpc signUp (CreateUserPayload) returns (ReturnEmpty) {}
+  rpc signUp (CreateUserPayload) returns (ResultUser) {}
   rpc signIn (SignInPayload) returns (ResultUser) {}
 }
 

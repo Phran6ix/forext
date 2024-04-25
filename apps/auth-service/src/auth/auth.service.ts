@@ -18,18 +18,17 @@ export class AuthService {
 
 
   async SignUp(data: CreateUserDTO): Promise<unknown> {
-    console.log("KKSL")
     // 1: User account is to be created
     // 2: User wallet is to be created
+    console.log("XX")
     const userExist = await this.userDataPoint.UserExist({ email: data.email, username: data.username })
-    console.log("Exist,", userExist)
     if (userExist) {
       throw new RpcException(new HttpException("User already exist", HttpStatus.CONFLICT))
     }
-
+console.log("YY")
     data.password = await Helper.hashPassword(data.password)
     const user = await this.userDataPoint.CreateUser(data)
-
+    console.log("USER", user)
     return user
   }
 

@@ -1,23 +1,20 @@
-import { Wallet } from "@forext/shared/entity";
+import { Wallet, User } from "@forext/shared/entity";
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { Type } from "class-transformer";
 import { WalletService } from "./wallet.service";
-import { ClientsModule } from "@nestjs/microservices";
-// import { UserDataPoint } from "@forext/data-access-user";
+import { WalletController } from "./wallet.controller";
+import { DataAccessWalletModule, WalletDataPoint } from "common/src/lib/data-access-wallet/src";
+import { UserDataPoint } from "@forext/data-access-user";
+import {dbConnection} from '@forext/shared/utils'
 
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: "mongodb",
-      host: "localhost",
-      port: 27017,
-      database: "forext",
-      synchronize: true
-    }),
-    TypeOrmModule.forFeature([Wallet]),
+    TypeOrmModule.forRoot(dbConnection),
+    DataAccessWalletModule,
+    TypeOrmModule.forFeature([User, Wallet]),
   ],
-  providers: [WalletService]
+  providers: [WalletService, WalletDataPoint, UserDataPoint],
+  controllers: [WalletController]
 })
 export class WalletModule { }

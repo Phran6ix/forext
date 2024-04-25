@@ -1,10 +1,16 @@
-import { Entity, Column, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { ObjectId } from "mongodb";
+import { Entity, Column, PrimaryColumn, PrimaryGeneratedColumn, BeforeInsert, ObjectIdColumn, AfterInsert } from "typeorm";
+
+import { v4 as uuidV4 } from "uuid"
 
 @Entity("User")
 export class User {
+  @ObjectIdColumn()
+  _id!: ObjectId
+
   @PrimaryColumn()
-  @PrimaryGeneratedColumn("uuid")
-  userId!: string;
+  @ObjectIdColumn()
+  userId!: string
 
   @Column({ type: String })
   firstname!: string
@@ -24,7 +30,17 @@ export class User {
   @Column({ type: Date, nullable: true })
   deletedAt!: Date
 
-  @Column({ type: Date, default: new Date() })
+  @Column({ type: Date })
   createdAt!: Date
 
+  @BeforeInsert()
+  beforeInsertAction?() {
+    this.createdAt = new Date()
+    this.userId = uuidV4()
+  }
+  // @AfterInsert()
+  //   assignId?() {
+  //
+  //     this.userId = this._id.toString()
+  //   }
 }

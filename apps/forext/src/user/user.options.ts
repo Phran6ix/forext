@@ -5,7 +5,7 @@ export default (): ClientProviderOptions => ({
   transport: Transport.GRPC,
   options: {
     package: "user",
-    protoPath: join(__dirname, "proto/user/user.proto")
+    protoPath: join(__dirname, "../../../proto/user/user.proto")
   }
 
 })

@@ -3,7 +3,7 @@ syntax = "proto3";
 package wallet;
 
 message CreateWalletPayload {
-  string userId =  1;
+  string userId = 1;
 }
 
 message GetUserWalletBalancePayload {
@@ -34,9 +34,10 @@ message CreditWalletBalancePayload {
 message ReturnEmpty {
 
 }
+
 service WalletService {
-  rpc CreateWallet (CreateWalletPayload) returns (ReturnEmpty) {}
-  rpc DebitwalletBalance (DebitWalletBalancePayload) returns (ReturnEmpty) {}
-  rpc CreditWalletBalance (CreditWalletBalancePayload) returns (ReturnEmpty)  {}
-  rpc GetUserWalletBalance (GetUserWalletBalancePayload) returns (ReturnEmpty)  {}
+  rpc createWallet (CreateWalletPayload) returns (ReturnEmpty) {}
+  rpc debitwalletBalance (DebitWalletBalancePayload) returns (ReturnEmpty) {}
+  rpc creditWalletBalance (CreditWalletBalancePayload) returns (ReturnEmpty)  {}
+  rpc getUserWalletBalance (GetUserWalletBalancePayload) returns (ReturnEmpty)  {}
 }

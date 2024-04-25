@@ -2,26 +2,21 @@ import { Module } from "@nestjs/common"
 import { AuthController } from "./auth.controller";
 import { ClientsModule } from "@nestjs/microservices";
 import { AuthService } from "./auth.service";
-import authOption from "./auth.option";
+import authOptions from "../option/auth.option";
+import walletOption from "../option/wallet.option";
 import { UserDataPoint } from "@forext/data-access-user"
-import { User } from "@forext/shared/entity";
+import { User, Wallet } from "@forext/shared/entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
-
+import { dbConnection } from "@forext/shared/utils";
 @Module({
   imports: [
     ClientsModule.register([
-      authOption
+      authOptions,
+      walletOption
     ]),
 
-    TypeOrmModule.forRoot({
-      type: "mongodb",
-      host: "localhost",
-      port: 27017,
-      database: "forext",
-      entities: [User],
-      synchronize: true
-    }),
-    TypeOrmModule.forFeature([User])
+    TypeOrmModule.forRoot(dbConnection),
+    TypeOrmModule.forFeature([User, Wallet])
   ],
   controllers: [AuthController],
   providers: [AuthService, UserDataPoint]

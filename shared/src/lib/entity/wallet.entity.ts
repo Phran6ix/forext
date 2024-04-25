@@ -1,8 +1,13 @@
-import { Column, Entity, JoinColumn, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./user.entity";
+import { BeforeInsert, Column, Entity, ObjectIdColumn, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { ObjectId } from "mongodb";
+import { v4 as uuidV4 } from "uuid"
 
 @Entity("Wallet")
 export class Wallet {
+  @ObjectIdColumn({ name: "_id" })
+  _id!: ObjectId
+
+  @PrimaryColumn()
   @PrimaryGeneratedColumn("uuid")
   walletId!: string
 
@@ -12,7 +17,16 @@ export class Wallet {
   @Column({ type: String, default: "NGN" })
   currency!: string
 
-  @Column(() => User)
-  @JoinColumn()
-  user!: User
+  @Column({ type: String })
+  @PrimaryColumn()
+  userId!: string
+
+  @BeforeInsert()
+  assignId?() {
+    this.walletId = uuidV4()
+    this.currency = "NGN"
+    this.amount = "0.00"
+
+  }
+
 }
