@@ -42,7 +42,8 @@ import { dbConnection } from "@forext/shared/utils"
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => ({
-        secret: config.get<string>("JWT_SECRET")
+        secret: config.get<string>("JWT_SECRET"),
+        expiresIn: "15m"
       }),
       inject: [ConfigService]
     })

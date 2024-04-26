@@ -15,15 +15,16 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      // "@forext/common": ["common/src/index.ts"],
-      "@forext/data-access-user": ["common/src/lib/data-access-user/src/index.ts"],
+      "@forext/data-access-user": [
+        "common/src/lib/data-access-user/src/index.ts"
+      ],
       "@forext/data-access-wallet": ["common/src/lib/data-access-wallet/src/"],
       "@forext/proto": ["proto/index.ts"],
       "@forext/shared": ["shared/src/index.ts"],
       "@forext/shared/decorator": ["shared/src/lib/decorator"],
-      "@forext/shared/guards": ["shared/src/lib/guards"],
       "@forext/shared/dto": ["shared/src/lib/dto"],
       "@forext/shared/entity": ["shared/src/lib/entity"],
+      "@forext/shared/guards": ["shared/src/lib/guards"],
       "@forext/shared/proto": ["shared/src/lib/_proto"],
       "@forext/shared/types": ["shared/src/lib/types"],
       "@forext/shared/utils": ["shared/src/lib/utils"]

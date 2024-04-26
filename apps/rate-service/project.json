@@ -1,0 +1,24 @@
+{
+  "name": "rate-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/rate-service/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "rate-service:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "rate-service:build:development"
+        },
+        "production": {
+          "buildTarget": "rate-service:build:production"
+        }
+      }
+    }
+  }
+}

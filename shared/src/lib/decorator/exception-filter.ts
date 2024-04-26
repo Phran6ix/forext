@@ -12,9 +12,9 @@ export class ExceptionHandler implements RpcExceptionFilter<RpcException> {
     const ctx = host.switchToHttp()
     const response = ctx.getResponse<Response>()
     console.log("ERRP", error)
-    // return response.status(402).json({
-    //   error
-    // })
-    return throwError(() => exception.getError());
+    return response.status(402).json({
+      error
+    })
+    // return throwError(() => exception.getError());
   }
 }

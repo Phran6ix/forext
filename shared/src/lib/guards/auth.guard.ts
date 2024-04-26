@@ -6,19 +6,6 @@ import { ConfigService } from "@nestjs/config";
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  // @Client({
-  //   transport: Transport.GRPC,
-  //   options: {
-  //     package: AUTH_PACKAGE_NAME,
-  //     protoPath: join(__dirname, "../../../proto/auth/auth.proto")
-  //   }
-  // })
-  // client!: ClientGrpc;
-  //
-  // private authService!: AuthServiceClient
-  // onModuleInit() {
-  //   this.authService = this.client.getService<AuthServiceClient>(AUTH_SERVICE_NAME)
-  // }
 
   constructor(
     private jwtService: JwtService,

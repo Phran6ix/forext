@@ -1,7 +1,7 @@
 import { AUTH_PACKAGE_NAME } from "@forext/proto";
 import { ClientProviderOptions, Transport } from "@nestjs/microservices";
 import { join } from "path";
-console.log(__dirname)
+
 const authOptions: ClientProviderOptions = {
   name: AUTH_PACKAGE_NAME,
   transport: Transport.GRPC,
