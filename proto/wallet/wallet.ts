@@ -24,6 +24,13 @@ export interface CreditWalletBalancePayload {
   currency: string;
 }
 
+export interface UserWalletResult {
+  userId: string;
+  walletId: string;
+  currency: string;
+  amount: string;
+}
+
 export interface ReturnEmpty {
 }
 
@@ -36,7 +43,7 @@ export interface WalletServiceClient {
 
   creditWalletBalance(request: CreditWalletBalancePayload): Observable<ReturnEmpty>;
 
-  getUserWalletBalance(request: GetUserWalletBalancePayload): Observable<ReturnEmpty>;
+  getUserWalletBalance(request: GetUserWalletBalancePayload): Observable<UserWalletResult>;
 }
 
 export interface WalletServiceController {
@@ -50,7 +57,7 @@ export interface WalletServiceController {
 
   getUserWalletBalance(
     request: GetUserWalletBalancePayload,
-  ): Promise<ReturnEmpty> | Observable<ReturnEmpty> | ReturnEmpty;
+  ): Promise<UserWalletResult> | Observable<UserWalletResult> | UserWalletResult;
 }
 
 export function WalletServiceControllerMethods() {

@@ -30,10 +30,19 @@ message SignInResult {
   ResultUser user = 2;
 }
 
+message tokenPayload {
+  string token = 1;
+}
+
+message tokenResult {
+  string userId = 1;
+}
+
 message ReturnEmpty {}
 
 service AuthService {
   rpc signUp (CreateUserPayload) returns (ResultUser) {}
   rpc signIn (SignInPayload) returns (SignInResult) {}
+  rpc validateUser (tokenPayload) returns (tokenResult) {}
 }
 

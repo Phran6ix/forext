@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { Entity, Column, PrimaryColumn, PrimaryGeneratedColumn, BeforeInsert, ObjectIdColumn, AfterInsert } from "typeorm";
+import { Entity, Column, PrimaryColumn, BeforeInsert, ObjectIdColumn } from "typeorm";
 
 import { v4 as uuidV4 } from "uuid"
 
@@ -8,8 +8,7 @@ export class User {
   @ObjectIdColumn()
   _id!: ObjectId
 
-  @PrimaryColumn()
-  @ObjectIdColumn()
+  @Column({ unique: true })
   userId!: string
 
   @Column({ type: String })
@@ -38,9 +37,4 @@ export class User {
     this.createdAt = new Date()
     this.userId = uuidV4()
   }
-  // @AfterInsert()
-  //   assignId?() {
-  //
-  //     this.userId = this._id.toString()
-  //   }
 }

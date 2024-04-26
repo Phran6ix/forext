@@ -21,6 +21,7 @@
       "@forext/proto": ["proto/index.ts"],
       "@forext/shared": ["shared/src/index.ts"],
       "@forext/shared/decorator": ["shared/src/lib/decorator"],
+      "@forext/shared/guards": ["shared/src/lib/guards"],
       "@forext/shared/dto": ["shared/src/lib/dto"],
       "@forext/shared/entity": ["shared/src/lib/entity"],
       "@forext/shared/proto": ["shared/src/lib/_proto"],

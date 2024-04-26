@@ -1,10 +1,5 @@
 /tTODO
 
-1. Replace the typeorm module forRoot with the dbConnectin
-2. Ensure the database connections are consistent
-3. start the walletservice and ensure  it works
-4. Implement wallet creation on signuo
-5. test user can view their wallet
 6. move to transaction
 7. Check the exter api docs
 8 . write the beans
