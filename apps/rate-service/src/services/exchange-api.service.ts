@@ -18,11 +18,9 @@ export class ExchangeApiService {
 
   public async GetUSDExchangeRates(): Promise<GetUSDRatesResult> {
     try {
-      console.log(`${this.URL}/${this.API_KEY}/latest/USD`)
       const response = await axios.get(
-        "https://v6.exchangerate-api.com/v6/fda8608286fbd30bbf9ea92c/latest/USD", {
+        `${this.URL}/${this.API_KEY}/latest/USD`, {
         headers: {
-          // "Content-Type": "application/json"
         }
       }
       )

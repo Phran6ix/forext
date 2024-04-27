@@ -20,7 +20,7 @@ async function bootstrap() {
   });
   await app.listen();
   Logger.log(
-    `🚀 Application is running on`
+    `🚀 Rate Application is running `
   );
 }
 

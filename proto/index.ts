@@ -4,3 +4,5 @@ export { WalletServiceControllerMethods, WalletServiceClient, WalletServiceContr
 
 export { AuthServiceControllerMethods, AUTH_PACKAGE_NAME, AuthServiceClient, AuthServiceController } from './auth/auth'
 export { RateServiceControllerMethods, RATE_PACKAGE_NAME, RATE_SERVICE_NAME, RateServiceClient, RateServiceController } from "./rate/rate"
+export {OrderServiceControllerMethods, ORDER_PACKAGE_NAME, ORDER_SERVICE_NAME, OrderServiceClient, OrderServiceController, CreateUserOrderResult, CreateUserOrderPayload, GetUserOrderResult, GetUserOrderPayload} from "./order/order"
+

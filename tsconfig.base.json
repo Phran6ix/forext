@@ -19,6 +19,7 @@
         "common/src/lib/data-access-user/src/index.ts"
       ],
       "@forext/data-access-wallet": ["common/src/lib/data-access-wallet/src/"],
+      "@forext/data-access-forex": ["common/src/lib/data-access-forex/src/"],
       "@forext/proto": ["proto/index.ts"],
       "@forext/shared": ["shared/src/index.ts"],
       "@forext/shared/decorator": ["shared/src/lib/decorator"],

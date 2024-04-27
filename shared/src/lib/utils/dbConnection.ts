@@ -1,12 +1,12 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm"
-import { User, Wallet } from "../entity"
+import { Forex, Order, User, Wallet } from "../entity"
 
 const dbConnection: TypeOrmModuleOptions = {
   type: "mongodb",
   host: "localhost",
   port: 27017,
   database: "forext",
-  entities: [User, Wallet],
+  entities: [User, Wallet, Forex, Order],
   synchronize: true
 }
 
