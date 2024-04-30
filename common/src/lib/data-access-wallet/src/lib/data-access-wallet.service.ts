@@ -10,7 +10,14 @@ export class WalletDataPoint {
     private walletRepo: Repository<Wallet>,
   ) { }
 
-  async GetUserWallet(userId: string): Promise<Wallet | null> {
+  async GetAllUsersWallet(userId: string): Promise<Wallet[]> {
+    return this.walletRepo.find({
+      where: {
+        userId
+      }
+    })
+  }
+  async GetUserWallet(userId: string, currency = "NGN"): Promise<Wallet | null> {
     // const _id = ObjectId(userId)
     return this.walletRepo.findOne({
       where: {
@@ -22,8 +29,7 @@ export class WalletDataPoint {
     })
   }
 
-  async CreateANewWallet(userId: string): Promise<unknown> {
-    console.log("Crete wallet called")
+  async CreateANewWallet(userId: string, currency = "NGN", metaData?: Partial<Wallet>): Promise<Wallet> {
     // const _id = new ObjectId(userId)
     const walletExist = await this.walletRepo.findOne({
       where: {
@@ -31,18 +37,11 @@ export class WalletDataPoint {
       }
     })
 
-    console.log(userId)
-    console.log("Crete wallet called")
-    console.log(walletExist)
-    // if (walletExist) {
-    //   throw new HttpException("Wallet already exisit", HttpStatus.BAD_REQUEST)
-    // }
-    console.log("over her")
-
     const newWallet = new Wallet()
     newWallet.userId = userId
-    await this.walletRepo.save(newWallet)
-    return
+    newWallet.currency = currency
+    newWallet.amount = metaData.amount || "0.00"
+    return await this.walletRepo.save(newWallet)
   }
 
   async GetWalletByWalletId(walletId: string): Promise<Wallet | null> {

@@ -14,7 +14,7 @@ export class OrderEntity {
   userId!: string
 
   @Column({ type: String })
-  forexId!: string
+  asset!: string
 
   @Column({ type: Date })
   dateInitialized!: Date
@@ -29,11 +29,12 @@ export class OrderEntity {
   numberOfAsset!: number
 
   @Column({type: Boolean, default: false})
-  orderProcessed: boolean
+  orderProcessed!: boolean
 
   @BeforeInsert()
   action?() {
     this.orderId = uuidv4()
     this.orderProcessed = false
+    this.dateInitialized= new Date()
   }
 }

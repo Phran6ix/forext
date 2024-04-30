@@ -18,6 +18,7 @@
       "@forext/data-access-user": [
         "common/src/lib/data-access-user/src/index.ts"
       ],
+      "@forext/data-access-order": ["common/src/lib/data-access-order/src/"],
       "@forext/data-access-wallet": ["common/src/lib/data-access-wallet/src/"],
       "@forext/data-access-forex": ["common/src/lib/data-access-forex/src/"],
       "@forext/proto": ["proto/index.ts"],

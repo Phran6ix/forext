@@ -9,7 +9,6 @@ message GetUserOrderPayload {
 message GetUserOrderResult {
   string userId = 1;
   string orderId = 2;
-  string forexId = 3;
   string dateInitialized = 4;
   string amount = 5;
   string currency = 6;
@@ -17,7 +16,6 @@ message GetUserOrderResult {
 
 message CreateUserOrderPayload {
   string userId = 1;
-  string forexId = 2;
   string asset = 3;
   string amount = 5;
 }

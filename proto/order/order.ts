@@ -11,7 +11,6 @@ export interface GetUserOrderPayload {
 export interface GetUserOrderResult {
   userId: string;
   orderId: string;
-  forexId: string;
   dateInitialized: string;
   amount: string;
   currency: string;
@@ -19,7 +18,6 @@ export interface GetUserOrderResult {
 
 export interface CreateUserOrderPayload {
   userId: string;
-  forexId: string;
   asset: string;
   amount: string;
 }

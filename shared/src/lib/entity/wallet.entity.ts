@@ -24,9 +24,6 @@ export class Wallet {
   @BeforeInsert()
   assignId?() {
     this.walletId = uuidV4()
-    this.currency = "NGN"
-    this.amount = "0.00"
-
   }
 
 }
