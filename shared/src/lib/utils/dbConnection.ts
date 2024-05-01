@@ -3,7 +3,7 @@ import { Forex, Order, User, Wallet } from "../entity"
 
 const dbConnection: TypeOrmModuleOptions = {
   type: "mongodb",
-  host: "localhost",
+  host: "forext_mongo",
   port: 27017,
   database: "forext",
   entities: [User, Wallet, Forex, Order],

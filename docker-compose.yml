@@ -1,0 +1,26 @@
+networks:
+  forext:
+
+services:
+  app:
+    build: .
+    ports:
+      - "40001:40001"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    command: "npm run start:all"
+    container_name: forext
+    depends_on:
+      - mongo
+    networks:
+        - forext
+
+  mongo:
+    image: mongo:4.4.2
+    container_name: forext_mongo
+    restart: "always"
+    volumes:
+      - ./db:/data/db
+    networks:
+        - forext

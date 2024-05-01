@@ -3,7 +3,14 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "proto:generate": "protoc --ts_proto_out=. ./proto/**/*.proto --ts_proto_opt=nestJs=true --experimental_allow_proto3_optional=true"
+    "proto:generate": "protoc --ts_proto_out=. ./proto/**/*.proto --ts_proto_opt=nestJs=true --experimental_allow_proto3_optional=true",
+    "start:auth":"npx nx serve auth-service",
+    "start:rate":"npx nx serve rate-service",
+    "start:order":"npx nx serve order-service",
+    "start:wallet":"npx nx serve wallet-service",
+    "start:user":"npx nx serve user-service",
+    "start:gateway":"npx nx serve forext",
+    "start:all" :"nx serve auth-service & nx serve rate-service & nx serve order-service & nx serve wallet-service & nx serve user-service & nx serve forext"
   },
   "private": true,
   "dependencies": {
